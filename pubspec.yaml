@@ -1,0 +1,48 @@
+name: getmoney
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  intl: any
+  cupertino_icons: ^1.0.6
+
+  # A wrapper around InheritedWidget to make them easier to use and more reusable.
+  provider: ^6.1.2
+
+  # https://pub.dev/packages/flutter_svg
+  flutter_svg: ^2.0.10+1
+
+  floor: ^1.4.2
+
+flutter_gen:
+  output: lib/gen/ # Optional (default: lib/gen/)
+  line_length: 80 # Optional (default: 80)
+
+  integrations:
+    flutter_svg: true
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+  floor_generator: ^1.4.2
+
+  build_runner: ^2.1.2
+  flutter_gen_runner:
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
