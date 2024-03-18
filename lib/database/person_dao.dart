@@ -9,6 +9,9 @@ abstract class PersonDao {
   @Query('DELETE FROM Person WHERE id = :id')
   Future<bool?> deletePerson(int id);
 
+  @Query('DELETE FROM Person')
+  Future<bool?> deleteAll();
+
   @Insert(onConflict: OnConflictStrategy.ignore)
   Future<void> insertPerson(Person person);
 

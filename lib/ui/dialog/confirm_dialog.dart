@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getmoney/theme/app_colors.dart';
-import 'package:getmoney/ui/inkwell_wrapper.dart';
+import 'package:getmoney/ui/ginseng/inkwell_wrapper.dart';
 import 'package:getmoney/utils/utils.dart';
 
 class ConfirmDialog extends StatelessWidget {
@@ -52,7 +52,10 @@ class ConfirmDialog extends StatelessWidget {
                   _buildActionWidget(
                     context: context,
                     title: "Cancel",
-                    textColor: AppColors.sff333333,
+                    textColor:  context.adaptiveColor(
+                      light: AppColors.sff333333,
+                      dark: AppColors.sffffffff,
+                    ),
                     callback: () {
                       Navigator.pop(context, false);
                     },

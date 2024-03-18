@@ -19,16 +19,21 @@ class UpdateUserDialog extends StatefulWidget {
 
 class _UpdateUserDialogState extends State<UpdateUserDialog> {
   late TextEditingController textController;
+  late TextEditingController nameController;
 
   @override
   void initState() {
     super.initState();
     textController = TextEditingController();
+    nameController = TextEditingController();
+
+    nameController.text = widget.person.name;
   }
 
   @override
   void dispose() {
     textController.dispose();
+    nameController.dispose();
     super.dispose();
   }
 
@@ -46,7 +51,7 @@ class _UpdateUserDialogState extends State<UpdateUserDialog> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "${widget.person.name} - ",
+          "${widget.person.name}   ",
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
           style: TextStyle(
@@ -87,6 +92,10 @@ class _UpdateUserDialogState extends State<UpdateUserDialog> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 22, right: 22, top: 28),
+            child: _buildNameTextField(context),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 22, right: 22, top: 28),
             child: _buildTextField(context),
           ),
           Padding(
@@ -97,13 +106,13 @@ class _UpdateUserDialogState extends State<UpdateUserDialog> {
               child: GradientButton(
                 onPressed: () async {
                   final pointer = int.parse(textController.value.text);
-                  print(pointer);
+                  final name = nameController.value.text;
 
-                  if (isInteger(pointer)) {
+                  if (isInteger(pointer) && name.isNotEmpty) {
                     Navigator.pop(
                       context,
-                      widget.person
-                          .copyWith(pointer: widget.person.pointer + pointer),
+                      widget.person.copyWith(
+                          name: name, pointer: widget.person.pointer + pointer),
                     );
                   }
                 },
@@ -157,7 +166,47 @@ class _UpdateUserDialogState extends State<UpdateUserDialog> {
             fontSize: 16,
             color: AppColors.sff828282,
           ),
-          hintText: "Enter new name player",
+          hintText: "Enter update point",
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(horizontal: 16),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNameTextField(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints(minHeight: 56),
+      decoration: BoxDecoration(
+        color: context.adaptiveColor(
+          light: AppColors.sffffffff,
+          dark: AppColors.sff1f1f1f,
+        ),
+        border: Border.all(
+          width: 1.0,
+          color: AppColors.sff828282,
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+      ),
+      child: TextField(
+        keyboardType: const TextInputType.numberWithOptions(signed: true),
+        style: TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 16,
+          color: context.adaptiveColor(
+            light: AppColors.sff000000,
+            dark: AppColors.sffffffff,
+          ),
+        ),
+        controller: nameController,
+        maxLines: 1,
+        decoration: const InputDecoration(
+          hintStyle: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+            color: AppColors.sff828282,
+          ),
+          hintText: "Enter update point",
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(horizontal: 16),
         ),

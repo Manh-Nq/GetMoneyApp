@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:getmoney/database/person.dart';
 import 'package:getmoney/gen/assets.gen.dart';
-import 'package:getmoney/ui/inkwell_wrapper.dart';
+import 'package:getmoney/ui/ginseng/inkwell_wrapper.dart';
 import 'package:getmoney/utils/utils.dart';
 
-import '../theme/app_colors.dart';
+import '../../theme/app_colors.dart';
 
 class UserWidget extends StatelessWidget {
   final Person person;
@@ -35,8 +35,9 @@ class UserWidget extends StatelessWidget {
               person.name,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style: const TextStyle(
-                color: AppColors.sff333333,
+              style: TextStyle(
+                color: context.adaptiveColor(
+                    light: AppColors.sff333333, dark: AppColors.sffffffff),
                 overflow: TextOverflow.ellipsis,
                 fontWeight: FontWeight.w600,
                 fontSize: 24,
@@ -80,8 +81,8 @@ class UserWidget extends StatelessWidget {
           ),
           InkWellWrapper(
             onTap: () async {
-              final isDelete =
-                  await context.showConfirmDialog(title: "Delete ${person.name} Player");
+              final isDelete = await context.showConfirmDialog(
+                  title: "Delete ${person.name} Player");
               if (isDelete == true) {
                 onDelete.call(person);
               }

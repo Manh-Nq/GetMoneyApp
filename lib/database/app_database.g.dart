@@ -149,6 +149,12 @@ class _$PersonDao extends PersonDao {
   }
 
   @override
+  Future<bool?> deleteAll() async {
+    return _queryAdapter.query('DELETE FROM Person',
+        mapper: (Map<String, Object?> row) => (row.values.first as int) != 0);
+  }
+
+  @override
   Future<void> insertPerson(Person person) async {
     await _personInsertionAdapter.insert(person, OnConflictStrategy.ignore);
   }
